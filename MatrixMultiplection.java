@@ -1,3 +1,6 @@
+//Розумняк Дарья
+//Домашка/Методы/Умножение матрицы на саму себя
+
 import java.util.Scanner;
 
 public class MatrixMultiplection {
