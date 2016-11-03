@@ -63,6 +63,7 @@ public class FigureTask3 {
 		square = new SquareClass(lenghtLn);
 		double areaSqr = square.squareArea(lenghtLn);
 		System.out.printf("Площадь квадрата: " + "%8.2f ", areaSqr);
+		System.out.println();
 
 		// трeугольник
 
@@ -96,6 +97,7 @@ public class FigureTask3 {
 				Integer.parseInt(xTriangle), Integer.parseInt(yTriangle));
 		double areaTrgl = triangle.triangleArea(ab, bc, bc);
 		System.out.printf("Площадь треугольника: " + "%8.2f ", areaTrgl);
+		System.out.println();
 		
 		//прямоугольник
 		
@@ -115,11 +117,13 @@ public class FigureTask3 {
 			System.out.println(e.getMessage());
 		}
 
-		double areaRect = rectangle.rectangleArea(lenghtLn, lineLenght(xRectangle, yRectangle, x1Rectangle, y1Rectangle))
+		double areaRect = rectangle.rectangleArea(lenghtLn, rectangle.lc1.lineLenght(Integer.parseInt(xRectangle), Integer.parseInt(yRectangle), Integer.parseInt(x1Rectangle), Integer.parseInt(y1Rectangle)));
 		
-		double diagonaLRect = rectangle.rectangleDiagonal(lenghtLn, );	
+		double diagonaLRect = rectangle.rectangleDiagonal(lenghtLn, rectangle.lc1.lineLenght(Integer.parseInt(xRectangle), Integer.parseInt(yRectangle), Integer.parseInt(x1Rectangle), Integer.parseInt(y1Rectangle)));	
 		System.out.printf("Площадь прямоугольника: " + "%8.2f ", areaRect);
+		System.out.println();
 		System.out.printf("Диагональ прямоугольника:  " + "%8.2f ", diagonaLRect);
+		System.out.println();
 		scanner.close();
 	}
 
@@ -266,8 +270,15 @@ class TriangleClass extends LineClass {
 // прямоугольник
 
 class RectangleClass extends LineClass {
+	
+	LineClass lc = null;
+	LineClass lc1 = null;
+
 	public RectangleClass(LineClass lc, LineClass lc1) {
 		super();
+		this.lc = lc;
+		this.lc1 = lc;
+		
 	}
 	
 	public double rectangleArea(double lenghtAB, double lenghtBC){ //площадь прямоугольника
