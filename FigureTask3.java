@@ -3,23 +3,21 @@ import java.util.Scanner;
 public class FigureTask3 {
 
 	public static void main(String[] args) {
-		
+
 		PointClass point = null;
 		LineClass line = null;
-		
+
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Введите координату X: ");
 		String xPoint = scanner.nextLine();
 		System.out.println("Ведите координату Y: ");
 		String yPoint = scanner.nextLine();
 		try {
-			 point = new PointClass(xPoint, yPoint);
-			 
+			point = new PointClass(xPoint, yPoint);
+
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		
-		
 
 		System.out.println("Введите координату X: ");
 		String xLine = scanner.nextLine();
@@ -32,12 +30,21 @@ public class FigureTask3 {
 
 		try {
 			line = new LineClass(xLine, yLine, x1Line, y1Line);
-			
+
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 
 		line.isOnLine(point);
+		double lineLenght = line.lineLenght(Integer.parseInt(xLine), Integer.parseInt(yLine), Integer.parseInt(x1Line),
+				Integer.parseInt(y1Line));
+
+		SquareClass square = new SquareClass(lineLenght);
+		double area = square.squareArea(lineLenght);
+
+		System.out.printf("Длинна линии: " + "%8.2f ", lineLenght);
+		System.out.println();
+		System.out.printf("Площадь квадрата: " + "%8.2f ", area);
 		scanner.close();
 	}
 
@@ -69,21 +76,23 @@ class PointClass {
 
 	}
 
-	/*public int getX() {
-		return x;
-	}
-
-	public void setX(int x) {
+	public PointClass() {
 
 	}
 
-	public int getY() {
-		return y;
-	}
-
-	public void setY(int y) {
-
-	}*/
+	/*
+	 * public int getX() { return x; }
+	 * 
+	 * public void setX(int x) {
+	 * 
+	 * }
+	 * 
+	 * public int getY() { return y; }
+	 * 
+	 * public void setY(int y) {
+	 * 
+	 * }
+	 */
 
 	protected boolean validate(String str) {
 		try {
@@ -99,9 +108,10 @@ class LineClass extends PointClass {
 
 	int x2;
 	int y2;
+	double l = 0;
 
 	public LineClass(String x, String y, String x2, String y2) throws Exception {
-		
+
 		super(x, y);
 
 		if (this.validate(x2)) {
@@ -117,15 +127,34 @@ class LineClass extends PointClass {
 		}
 	}
 
+	public LineClass() {
+
+	}
+
 	public boolean isOnLine(PointClass p) {
-		
-		if((y - y2)*p.x + (x2 - x)*p.y + (x*y2 - x2*y) == 0) {
-		
-		//if ((p.x - x) / (x1 - x) == (p.y - y) / (y1 - y)) {
+
+		if ((y - y2) * p.x + (x2 - x) * p.y + (x * y2 - x2 * y) == 0) {
 			System.out.println("Точка лежит на линии");
 		} else {
 			System.out.println("Точка НЕ лежит на линии");
 		}
 		return true;
+	}
+
+	public double lineLenght(int x, int y, int x2, int y2) {
+		l = (Math.sqrt((Math.pow((x2 - x), 2)) + (Math.pow((y2 - y), 2))));
+		return l;
+	}
+}
+
+class SquareClass extends LineClass { // квадрат
+
+	public SquareClass(double lineLength) {
+		super();
+		this.lineLenght(x, y, x2, y2); // длинна линии
+	}
+
+	public double squareArea(double lineLenght) {
+		return Math.pow(lineLenght, 2);
 	}
 }
