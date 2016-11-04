@@ -115,8 +115,8 @@ class Roses extends LiveFlowers {
 	
 	boolean thorns;
 	
-	public Roses(int price, int flowerLength, int freshness, String grade, boolean thorns) {
-		super(price, flowerLength, freshness, grade);
+	public Roses(int price, int flowerLength, int freshness, boolean thorns) {
+		super(price, flowerLength, freshness);
 		this.thorns = thorns;
 	}
 }
