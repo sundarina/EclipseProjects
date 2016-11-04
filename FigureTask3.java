@@ -1,3 +1,6 @@
+//Розумняк Дарья
+// Задача 3 тема ООП1
+
 import java.util.Scanner;
 
 /*
@@ -95,7 +98,7 @@ public class FigureTask3 {
 				Integer.parseInt(x2Triangle), Integer.parseInt(y2Triangle));
 		double ca = triangle.lineLenght(Integer.parseInt(x2Triangle), Integer.parseInt(y2Triangle),
 				Integer.parseInt(xTriangle), Integer.parseInt(yTriangle));
-		double areaTrgl = triangle.triangleArea(ab, bc, bc);
+		double areaTrgl = triangle.triangleArea(ab, bc, ca);
 		System.out.printf("Площадь треугольника: " + "%8.2f ", areaTrgl);
 		System.out.println();
 		
@@ -129,11 +132,11 @@ public class FigureTask3 {
 
 }
 
-class PointClass {
+class PointClass { //точка
 	protected int x;
 	protected int y;
 
-	public PointClass(String x, String y) throws Exception {
+	public PointClass(String x, String y) throws Exception { //проверка ввода чисел пользователем
 		if (this.validate(x)) {
 			this.x = Integer.parseInt(x);
 		} else {
@@ -148,7 +151,7 @@ class PointClass {
 
 	}
 
-	public PointClass() {
+	public PointClass() { //пустой конструктор по умолчанию???
 
 	}
 
@@ -162,7 +165,7 @@ class PointClass {
 	}
 }
 
-class LineClass extends PointClass {
+class LineClass extends PointClass { //линия
 
 	int x2;
 	int y2;
@@ -189,7 +192,7 @@ class LineClass extends PointClass {
 
 	}
 
-	public boolean isOnLine(PointClass p) {
+	public boolean isOnLine(PointClass p) { //принадлежность точки линии
 
 		if ((y - y2) * p.x + (x2 - x) * p.y + (x * y2 - x2 * y) == 0) {
 			System.out.println("Точка лежит на линии");
@@ -199,25 +202,25 @@ class LineClass extends PointClass {
 		return true;
 	}
 
-	public double lineLenght(int x, int y, int x2, int y2) {
+	public double lineLenght(int x, int y, int x2, int y2) { //длинна линии
 		l = (Math.sqrt((Math.pow((x2 - x), 2)) + (Math.pow((y2 - y), 2))));
 		return l;
 	}
 }
 
-class SquareClass extends LineClass { // квадрат
+class SquareClass extends LineClass { // квадрат, основанный на параметрах линии
 
 	public SquareClass(double lineLength) {
 		super();
 		this.lineLenght(x, y, x2, y2); // длинна линии
 	}
 
-	public double squareArea(double lineLenght) {
+	public double squareArea(double lineLenght) {  //площадь квадрата
 		return Math.pow(lineLenght, 2);
 	}
 }
 
-class TriangleClass extends LineClass {
+class TriangleClass extends LineClass { //треугольник
 
 	int x1;
 	int y1;
@@ -245,7 +248,7 @@ class TriangleClass extends LineClass {
 
 	}
 
-	public boolean isOnTriangle(PointClass p) {
+	public boolean isOnTriangle(PointClass p) {  //принадлежность точки треугольнику
 
 		int a = (x - p.x) * (y1 - y) - (x1 - x) * (y - p.y);
 		int b = (x1 - p.x) * (y2 - y1) - (x2 - x1) * (y1 - p.y);
@@ -259,17 +262,16 @@ class TriangleClass extends LineClass {
 		return true;
 	}
 
-	public double triangleArea(double lenghtAB, double lenghtBC, double lengthCA) { // длинні
-																					// сторон
-																					// треугольника
+	public double triangleArea(double lenghtAB, double lenghtBC, double lengthCA) { // площадь треугольника через длинну его сторон
+																					
 		double p = ((lenghtAB + lenghtBC + lengthCA) / 2); // полупериметр
 		return Math.sqrt(p * (p - lenghtAB) * (p - lenghtBC) * (p - lengthCA));
 	}
 }
 
-// прямоугольник
 
-class RectangleClass extends LineClass {
+
+class RectangleClass extends LineClass {  // прямоугольник
 	
 	LineClass lc = null;
 	LineClass lc1 = null;
