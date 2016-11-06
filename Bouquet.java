@@ -7,6 +7,7 @@
 стеблей. Создать букет из цветов трех видов, где выбор каждого
 цветка букета происходит случайно. Первый выбирается с
 вероятностью 30 %, второй – 5 %, третий – 65 %.*/
+//0.3  0.05  0.65
 
 public class Bouquet {
 
@@ -36,6 +37,7 @@ public class Bouquet {
 	}
 
 	public Bouquet() {
+		
 		this.flowersCount = flowersCount;
 		this.accesoriesCount = accesoriesCount;
 
@@ -86,6 +88,23 @@ public class Bouquet {
 			}
 		}
 
+	}
+
+	public void randomFlowers() {
+		for (int i = 0; i < flowers.length; i++) {
+			int index = (int) (Math.random() * 100);
+			if (index > 0 && index <= 5) {
+				addFlower(new Flower());
+			}
+
+			if (index > 5 && index <= 30) {
+				addFlower(new LiveFlower());
+			}
+
+			if (index > 30 && index <= 100) {
+				 addFlower(new Roses());
+			}
+		}
 	}
 
 	public Flower lengthDiapason(int min, int max) {
@@ -185,7 +204,7 @@ class LiveFlower extends Flower {
 		super(price, flowerLength);
 		this.freshness = freshness;
 	}
-	
+
 	public LiveFlower() {
 		super();
 		this.freshness = 10;
@@ -206,7 +225,7 @@ class ArtificialFlower extends Flower {
 		super(price, flowerLength);
 		this.freshness = 0;
 	}
-	
+
 	public ArtificialFlower() {
 		super();
 		this.freshness = 0;
@@ -226,7 +245,7 @@ class Roses extends LiveFlower {
 	public Roses() {
 		super();
 		this.freshness = 9;
-		this.thorns =  false;
+		this.thorns = false;
 	}
 }
 
