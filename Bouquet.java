@@ -19,7 +19,7 @@ public class Bouquet {
 	int max;
 	int n;
 
-	Flowers[] flowers;
+	Flower[] flowers;
 	Accessories[] accesories;
 	int flowersCount;
 	int accesoriesCount;
@@ -30,16 +30,20 @@ public class Bouquet {
 		this.flowersCount = flowersCount;
 		this.accesoriesCount = accesoriesCount;
 
-		this.flowers = new Flowers[flowersCount];
+		this.flowers = new Flower[flowersCount];
 		this.accesories = new Accessories[accesoriesCount];
 
 	}
 
 	public Bouquet() {
-		// TODO Auto-generated constructor stub
+		this.flowersCount = flowersCount;
+		this.accesoriesCount = accesoriesCount;
+
+		this.flowers = new Flower[flowersCount];
+		this.accesories = new Accessories[accesoriesCount];
 	}
 
-	public boolean addFlower(Flowers f) {
+	public boolean addFlower(Flower f) {
 		if (flowerIndex < flowersCount) {
 			this.flowers[flowerIndex] = f;
 			flowerIndex++;
@@ -63,23 +67,33 @@ public class Bouquet {
 		for (int i = 0; i < flowers.length; i++) {
 			sum += flowers[i].getPrice();
 		}
-		
-		for (int i = 0; i < accesories.length; i++){
-			sum += accesories[i].getPrice(); 
+
+		for (int i = 0; i < accesories.length; i++) {
+			sum += accesories[i].getPrice();
 		}
 		return sum;
 	}
 
-	public void freshSort(Bouquet[] bouquet, int freshness) {
+	public void freshSort() {
+		for (int i = 0; i < flowers.length; i++) {
+			for (int j = 0; j < flowers.length - i - 1; j++) {
+
+				if (flowers[j].getFreshness() > flowers[j + 1].getFreshness()) {
+					Flower tmp = flowers[j];
+					flowers[j] = flowers[j + 1];
+					flowers[j + 1] = tmp;
+				}
+			}
+		}
 
 	}
 
-	public Flowers lengthDiapason(int min, int max) {
-		for (int i = 0; i < flowers.length; i++ ) {
-			if (flowers[i].flowerLength >= min && flowers[i].flowerLength <= max){
+	public Flower lengthDiapason(int min, int max) {
+		for (int i = 0; i < flowers.length; i++) {
+			if (flowers[i].flowerLength >= min && flowers[i].flowerLength <= max) {
 				return flowers[i];
-			} 
-		} 
+			}
+		}
 		return null;
 	}
 
@@ -116,18 +130,20 @@ class Accessories {
 	}
 }
 
-class Flowers {
+class Flower {
 
 	private double price;
 	int flowerLength;
+	protected int freshness;
 
-	public Flowers(int price, int flowerLength) {
+	public Flower(int price, int flowerLength) {
 		this.price = price;
 		this.flowerLength = flowerLength;
 	}
 
-	public Flowers() {
-
+	public Flower() {
+		this.price = 22.0;
+		this.flowerLength = 5;
 	}
 
 	public double getPrice() {
@@ -141,59 +157,64 @@ class Flowers {
 			this.price = -1;
 		}
 	}
-}
-
-class LiveFlowers extends Flowers {
-
-	protected int freshness;
-	String grade;
-
-	public LiveFlowers(int price, int flowerLength, int freshness, String grade) {
-		super(price, flowerLength);
-		this.freshness = freshness;
-		this.grade = grade;
-	}
-
-	public LiveFlowers(int price, int flowerLength, int freshness) {
-		super(price, flowerLength);
-		this.freshness = freshness;
-	}
-
-	public LiveFlowers() {
-		super();
-		// this.freshness = freshness;
-		// this.grade = grade;
-	}
 
 	public int getFreshness() {
 		return freshness;
 	}
 
 	public void setFreshness(int freshness) {
-		if (freshness >= 1 && freshness <= 10) {
+		if (freshness >= 0 && freshness <= 10) {
 			this.freshness = freshness;
 		}
 		this.freshness = -1;
 	}
 }
 
-class ArtificialFlowers extends Flowers {
+class LiveFlower extends Flower {
 
-	static final int freshnessArtificial = 0;
-	String material;
+	protected int freshness;
+	String grade;
 
-	public ArtificialFlowers(int price, int flowerLength, int freshnessArtificial, String material) {
+	public LiveFlower(int price, int flowerLength, int freshness, String grade) {
 		super(price, flowerLength);
-		this.material = material;
+		this.freshness = freshness;
+		this.grade = grade;
 	}
 
-	public ArtificialFlowers(int price, int flowerLength, int freshnessArtificial) {
+	public LiveFlower(int price, int flowerLength, int freshness) {
 		super(price, flowerLength);
-
+		this.freshness = freshness;
+	}
+	
+	public LiveFlower() {
+		super();
+		this.freshness = 10;
 	}
 }
 
-class Roses extends LiveFlowers {
+class ArtificialFlower extends Flower {
+
+	String material;
+
+	public ArtificialFlower(int price, int flowerLength, String material) {
+		super(price, flowerLength);
+		this.material = material;
+		this.freshness = 0;
+	}
+
+	public ArtificialFlower(int price, int flowerLength) {
+		super(price, flowerLength);
+		this.freshness = 0;
+	}
+	
+	public ArtificialFlower() {
+		super();
+		this.freshness = 0;
+	}
+
+}
+
+class Roses extends LiveFlower {
 
 	boolean thorns;
 
@@ -204,10 +225,12 @@ class Roses extends LiveFlowers {
 
 	public Roses() {
 		super();
+		this.freshness = 9;
+		this.thorns =  false;
 	}
 }
 
-class Chamomile extends LiveFlowers {
+class Chamomile extends LiveFlower {
 
 	int petalsNum;
 
@@ -218,5 +241,6 @@ class Chamomile extends LiveFlowers {
 
 	public Chamomile() {
 		super();
+		this.petalsNum = 9;
 	}
 }
