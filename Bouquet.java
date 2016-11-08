@@ -4,14 +4,14 @@
 
 public class Bouquet {
 
-//	double price;
-//	int flowerLength;
-//	int freshness;
-//	boolean thorns;
-//	String material;
-//	int min;
-//	int max;
-//	int n;
+	// double price;
+	// int flowerLength;
+	// int freshness;
+	// boolean thorns;
+	// String material;
+	// int min;
+	// int max;
+	// int n;
 
 	Flower[] flowers;
 	Accessories[] accesories;
@@ -69,21 +69,35 @@ public class Bouquet {
 		return sum;
 	}
 
-//	public void freshSort() {
-//		for (int i = 0; i < flowers.length; i++) {
-//			for (int j = 0; j < flowers.length - i - 1; j++) {
-//
-//				if (flowers[j].getFreshness() > flowers[j + 1].getFreshness()) {
-//					Flower tmp = flowers[j];
-//					flowers[j] = flowers[j + 1];
-//					flowers[j + 1] = tmp;
-//				}
-//			}
-//		}
-//
-//	}
+	public void freshSort() {
+		int k = flowers.length - 1;
 
-	public void randomFlowers() { // ?
+		for (int i = 0; i < flowers.length; i++) {
+			if (i < k) {
+				if (flowers[i] instanceof ArtificialFlower) {
+					Flower tmp = flowers[i];
+					flowers[i] = flowers[k];
+					flowers[k] = tmp;
+					k--;
+				}
+			} else
+				break;
+		}
+
+		for (int i = 0; i < k; i++) {
+			for (int j = 0; j < k - i - 1; j++) {
+				if (flowers[i] instanceof LiveFlower) {
+					if (((LiveFlower) flowers[j]).getFreshness() > ((LiveFlower) flowers[j + 1]).getFreshness()) {
+						Flower tmp = flowers[j];
+						flowers[j] = flowers[j + 1];
+						flowers[j + 1] = tmp;
+					}
+				}
+			}
+		}
+	}
+
+	public void randomFlowers() {
 
 		for (int i = 0; i < flowers.length; i++) {
 			int index = (int) (Math.random() * 100);
@@ -103,7 +117,7 @@ public class Bouquet {
 
 	public Flower lengthDiapason(int min, int max) {
 		for (int i = 0; i < flowers.length; i++) {
-			if (flowers[i].flowerLength >= min && flowers[i].flowerLength <= max) {
+			if (flowers[i].getFlowerLength() >= min && flowers[i].getFlowerLength() <= max) {
 				return flowers[i];
 			}
 		}
@@ -134,9 +148,9 @@ public class Bouquet {
 		System.out.println();
 
 		System.out.println("Рейтинг свежести: ");
-		//bouquet.freshSort();
+		bouquet.freshSort();
 		Flower[] flowerArray = bouquet.getFlower();
-		for (int i = flowerArray.length - 1; i >= 0; i--) {
+		for (int i = 0; i < flowerArray.length; i++) {
 			System.out.println(flowerArray[i].getGrade());
 		}
 

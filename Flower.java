@@ -14,8 +14,8 @@
 
 public class Flower {
 
-	protected double price;
-	protected int flowerLength;
+	private double price;
+	private int flowerLength;
 
 	protected String grade;
 
@@ -68,6 +68,7 @@ class LiveFlower extends Flower {
 	public LiveFlower() {
 		super();
 		this.freshness = 10;
+		
 	}
 	
 	public int getFreshness() {
