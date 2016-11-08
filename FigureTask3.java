@@ -152,7 +152,8 @@ class PointClass { //точка
 	}
 
 	public PointClass() { //пустой конструктор по умолчанию???
-
+		this.x = 4;
+		this.y = -3;
 	}
 
 	protected boolean validate(String str) {
@@ -189,7 +190,9 @@ class LineClass extends PointClass { //линия
 	}
 
 	public LineClass() {
-
+		super();
+		this.x2 = -8;
+		this.y2 = 0;
 	}
 
 	public boolean isOnLine(PointClass p) { //принадлежность точки линии
@@ -213,6 +216,11 @@ class SquareClass extends LineClass { // квадрат, основанный н
 	public SquareClass(double lineLength) {
 		super();
 		this.lineLenght(x, y, x2, y2); // длинна линии
+	}
+	
+	public SquareClass() {
+		super();
+		this.lineLenght(5, 7, -9, 7);
 	}
 
 	public double squareArea(double lineLenght) {  //площадь квадрата
@@ -245,7 +253,9 @@ class TriangleClass extends LineClass { //треугольник
 	}
 
 	public TriangleClass() {
-
+		super();
+		this.x2 = 6;
+		this.y2 = 3;
 	}
 
 	public boolean isOnTriangle(PointClass p) {  //принадлежность точки треугольнику
@@ -281,6 +291,10 @@ class RectangleClass extends LineClass {  // прямоугольник
 		this.lc = lc;
 		this.lc1 = lc;
 		
+	}
+	
+	public RectangleClass() {
+		super();
 	}
 	
 	public double rectangleArea(double lenghtAB, double lenghtBC){ //площадь прямоугольника
