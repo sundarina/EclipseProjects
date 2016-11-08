@@ -4,21 +4,21 @@
 
 public class Bouquet {
 
-	double price;
-	int flowerLength;
-	int freshness;
-	boolean thorns;
-	String material;
-	int min;
-	int max;
-	int n;
+//	double price;
+//	int flowerLength;
+//	int freshness;
+//	boolean thorns;
+//	String material;
+//	int min;
+//	int max;
+//	int n;
 
 	Flower[] flowers;
 	Accessories[] accesories;
-	int flowersCount;
-	int accesoriesCount;
-	int flowerIndex = 0;
-	int accesoriesIndex = 0;
+	private int flowersCount;
+	private int accesoriesCount;
+	private int flowerIndex = 0;
+	private int accesoriesIndex = 0;
 
 	public Bouquet(int flowersCount, int accesoriesCount) {
 		this.flowersCount = flowersCount;
@@ -69,19 +69,19 @@ public class Bouquet {
 		return sum;
 	}
 
-	public void freshSort() {
-		for (int i = 0; i < flowers.length; i++) {
-			for (int j = 0; j < flowers.length - i - 1; j++) {
-
-				if (flowers[j].getFreshness() > flowers[j + 1].getFreshness()) {
-					Flower tmp = flowers[j];
-					flowers[j] = flowers[j + 1];
-					flowers[j + 1] = tmp;
-				}
-			}
-		}
-
-	}
+//	public void freshSort() {
+//		for (int i = 0; i < flowers.length; i++) {
+//			for (int j = 0; j < flowers.length - i - 1; j++) {
+//
+//				if (flowers[j].getFreshness() > flowers[j + 1].getFreshness()) {
+//					Flower tmp = flowers[j];
+//					flowers[j] = flowers[j + 1];
+//					flowers[j + 1] = tmp;
+//				}
+//			}
+//		}
+//
+//	}
 
 	public void randomFlowers() { // ?
 
@@ -134,7 +134,7 @@ public class Bouquet {
 		System.out.println();
 
 		System.out.println("Рейтинг свежести: ");
-		bouquet.freshSort();
+		//bouquet.freshSort();
 		Flower[] flowerArray = bouquet.getFlower();
 		for (int i = flowerArray.length - 1; i >= 0; i--) {
 			System.out.println(flowerArray[i].getGrade());
