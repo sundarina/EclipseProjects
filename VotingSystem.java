@@ -1,30 +1,46 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class VotingSystem {
 
-	private List users;
+	private List<User> users;
 	private Voting currentVoting;
 	private User currentUser;
 
-	private User addUser(String name, String login, String password, String repeation) {
+	public VotingSystem() {
+		this.users = new ArrayList<User>();
+		// this.currentVoting = currentVoting;
+		// this.currentUser = currentUser;
+	}
 
+	public User addUser(String name, String login, String password) {
+		User user = new User(name, login, password);
+		users.add(user);
+		return user;
 	}
 
 	private User findUser(String login, String password) {
-
+		for (int i = 0; i < users.size(); i++) {
+			if (users.get(i).getLogin().equals(login) && users.get(i).getPassword().equals(password)) {
+				return users.get(i); 
+			}
+		} 
+		return null; //выход из цикла , если пользователь не найден
 	}
 
-	private void save() {
-
-	}
-
-	private void load() {
-
-	}
-
-	private List saveResults() {
-
-	}
+	/*
+	 * private void save() {
+	 * 
+	 * }
+	 * 
+	 * private void load() {
+	 * 
+	 * }
+	 * 
+	 * private List getResults() {
+	 * 
+	 * }
+	 */
 
 	public static void main(String[] args) {
 
@@ -33,11 +49,23 @@ public class VotingSystem {
 
 class Voting {
 	private String title;
-	private List candidats;
+	private List<Candidate> candidates;
 
-	public Voting(String title, List candidats) {
+	public Voting(String title) {
 		this.title = title;
-		this.candidats = candidats;
+		this.candidates = new ArrayList<Candidate>();
+	}
+
+	public void addCandidates(Candidate cnd) {
+		candidates.add(cnd);
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public List<Candidate> getCandidates() {
+		return candidates;
 	}
 
 }
@@ -47,7 +75,6 @@ class Candidate {
 	private int voices = 0;
 
 	public Candidate(String name) {
-		super();
 		this.name = name;
 	}
 
@@ -63,8 +90,7 @@ class Candidate {
 		return voices;
 	}
 
-	public void setVoices(int voices) {
-		this.voices = voices;
+	public void addVoice() {
+		voices++;
 	}
-
 }

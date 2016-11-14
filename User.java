@@ -1,3 +1,4 @@
+import java.util.List;
 
 public class User {
 	
@@ -6,7 +7,6 @@ public class User {
 	private String password;
 
 	public User(String name, String login, String password) {
-		super();
 		this.name = name;
 		this.login = login;
 		this.password = password;
@@ -39,9 +39,9 @@ public class User {
 	public boolean enter(String login, String password) {
 		if(this.login.equals(login) && this.password.equals(password)){
 			return true;
-		} else {
-			return false;
 		}
+		
+		return false;
 	}
 	
 }
@@ -49,9 +49,9 @@ public class User {
 class Elector extends User {
 
 	private boolean voted;
+	private Voting voting;
 	
 	
-
 	public Elector(String name, String login, String password) {
 		super(name, login, password);
 	}
@@ -60,8 +60,23 @@ class Elector extends User {
 		return voted;
 	}
 
-	public void vote() {
+	public void vote(String name) {
+		if (voted == false) {
+			return;
+		}
 		
+		List<Candidate> list = voting.getCandidates();
+		for (int i = 0; i < list.size(); i++) {
+			if(list.get(i).getName().equals(name)){
+				list.get(i).addVoice();
+				voted = true;
+				break; //чтоб не делать лишних прохождений цикла
+			}
+		}
+	}
+	
+	public void setVoting(Voting vt) { //доступ изберателя к голосованию
+		voting = vt;
 	}
 }
 
