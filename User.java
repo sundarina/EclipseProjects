@@ -61,8 +61,8 @@ class Elector extends User {
 	}
 
 	public void vote(String name) {
-		if (voted == false) {
-			return;
+		if (voted == true) {
+			return; // если пользователь голосовал уже - выход из метода
 		}
 		
 		List<Candidate> list = voting.getCandidates();
