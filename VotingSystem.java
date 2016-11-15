@@ -8,7 +8,7 @@ public class VotingSystem {
 
 	private List<User> users;
 	private Voting currentVoting;
-	private User currentUser;
+	private Elector currentUser;
 
 	public VotingSystem() {
 		this.users = new ArrayList<User>();
@@ -24,7 +24,7 @@ public class VotingSystem {
 		}
 	}
 
-	private User findUser(String login, String password) {
+	private Elector findUser(String login, String password) {
 		for (int i = 0; i < users.size(); i++) {
 			if (users.get(i).getLogin().equals(login) && users.get(i).getPassword().equals(password)) {
 				if(currentUser instanceof Elector){
@@ -47,12 +47,7 @@ public class VotingSystem {
 	 */
 	private List<Candidate> getResults() {
 		List<Candidate> candidatesList = currentVoting.getCandidates();
-		if (currentUser instanceof Elector) {
-			if (((Elector) currentUser).isVoted() == true) {
 				return candidatesList;
-			}
-		}
-		return null;
 	}
 
 	public static void main(String[] args) {
@@ -97,13 +92,14 @@ public class VotingSystem {
 		System.out.println("Введите имя кандидата: ");
 		String candidateName = scanner.nextLine();
 
-		Elector currentUser = (Elector) votingSystem.findUser(userLogin, userPassword);
+		Elector currentUser = votingSystem.findUser(userLogin, userPassword);
 		
 		currentUser.setVoting(votig);
 		currentUser.vote(candidateName); 
 		
 		System.out.println("Результат голосования: ");
 
+		List<User> users = new A
 		votingSystem.getResults();
 		
 		 Collections.sort(votig.getCandidates(), new Candidate(candidateName));
