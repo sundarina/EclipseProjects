@@ -99,8 +99,8 @@ public class VotingSystem {
 		
 		System.out.println("Результат голосования: ");
 
-		List<User> users = new A
-		votingSystem.getResults();
+		List<Candidate> candidateList = new ArrayList<Candidate>();
+		candidateList = votingSystem.getResults();
 		
 		 Collections.sort(votig.getCandidates(), new Candidate(candidateName));
 	      System.out.println(" ");

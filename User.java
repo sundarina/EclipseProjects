@@ -36,13 +36,13 @@ public class User {
 		this.password = password;
 	}
 	
-	public boolean enter(String login, String password) {
+/*	public boolean enter(String login, String password) {
 		if(this.login.equals(login) && this.password.equals(password)){
 			return true;
 		}
 		
 		return false;
-	}
+	}*/
 	
 }
 
